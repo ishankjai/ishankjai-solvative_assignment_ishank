@@ -13,30 +13,34 @@ const App = () => {
 
   // api handler for getting cities data.
   const getApiData = async () => {
-    const response = await axios.request({
-      method: 'GET',
-      url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities',
-      params: {
-        limit: pageLimit,
-        countryIds: 'IN',
-        namePrefix: search || 'del'
-      },
-      headers: {
-        'X-RapidAPI-Key': 'af0095dc2cmsh88245b6a5c2bd36p1843f2jsnc6799d29651a',
-        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
-      }
-    });
-    let resArr = [];
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities',
+        params: {
+          limit: pageLimit,
+          countryIds: 'IN',
+          namePrefix: search || "del"
+        },
+        headers: {
+          'X-RapidAPI-Key': 'af0095dc2cmsh88245b6a5c2bd36p1843f2jsnc6799d29651a',
+          'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+        }
+      });
+      let resArr = [];
 
-    response?.data?.data?.forEach((element, index) => {
-      let flag = `https://flagsapi.com/${element?.countryCode}/shiny/64.png`;
-      let resultObj = {};
-      resultObj.index = index + 1;
-      resultObj.place = element?.name;
-      resultObj.country = flag;
-      resArr?.push(resultObj);
-    });
-    setData(resArr);
+      response?.data?.data?.forEach((element, index) => {
+        let flag = `https://flagsapi.com/${element?.countryCode}/shiny/64.png`;
+        let resultObj = {};
+        resultObj.index = index + 1;
+        resultObj.place = element?.name;
+        resultObj.country = flag;
+        resArr?.push(resultObj);
+      });
+      setData(resArr);
+    } catch (error) {
+      console.log("Eror___ ", error);
+    }
   }
 
   useEffect(() => {
@@ -62,7 +66,7 @@ const App = () => {
       </div>
 
       {/* table component */}
-      <Table headers={headers} data={data} />
+      <Table headers={headers} data={data} search={search} />
 
       {/* Pagination */}
       <div className='paginationWrapper' >

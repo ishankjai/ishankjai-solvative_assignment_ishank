@@ -26,3 +26,11 @@ th {
 .responsiveTable td {
     border-bottom: 1px solid rgb(222, 226, 230);
 }
+
+.noRecordFoundLabel {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

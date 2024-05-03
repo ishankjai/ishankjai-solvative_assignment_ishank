@@ -2,7 +2,7 @@ import React from 'react';
 import "./table.css";
 
 
-const Table = ({ headers, data }) => {
+const Table = ({ headers, data, search }) => {
     return (
         <div className="tableWrapper">
             <table className="responsiveTable">
@@ -14,19 +14,22 @@ const Table = ({ headers, data }) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody>
-                    {/* mapping the table data coming from the api. */}
-                    {data?.map((item, index) => {
-                        return <tr key={index}>
-                            <td>{item.index}</td>
-                            <td>{item.place}</td>
-                            <td><img src={item.country} alt="Flag" /></td>
-                        </tr>
-                    }
-                    )}
-                </tbody>
+                {
+                    data?.length ? <tbody>
+                        {/* mapping the table data coming from the api. */}
+
+                        {data?.map((item, index) => {
+                            return <tr key={index}>
+                                <td>{item.index}</td>
+                                <td>{item.place}</td>
+                                <td><img src={item.country} alt="Flag" /></td>
+                            </tr>
+                        }
+                        )}
+                    </tbody> : <div className='noRecordFoundLabel'>{!search ? "Start Searching" : "No Record Found"}</div>
+                }
             </table>
-        </div>
+        </div >
     );
 };
 
