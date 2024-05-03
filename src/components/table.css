@@ -1,0 +1,28 @@
+.tableWrapper {
+    overflow-x: auto;
+    height: 100vh;
+    margin: 16px;
+    height: calc(100vh - 190px);
+}
+
+.responsiveTable {
+    width: 100%;
+    min-width: 300px;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+}
+
+.responsiveTable th {
+    border-bottom: 1px solid rgb(33, 37, 41);
+}
+
+.responsiveTable td:nth-child(1) {
+    font-weight: bold;
+}
+
+.responsiveTable td {
+    border-bottom: 1px solid rgb(222, 226, 230);
+}
